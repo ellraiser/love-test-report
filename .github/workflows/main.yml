@@ -12,7 +12,8 @@ jobs:
     - name: Love Test Report
       uses: ellraiser/love-test-report@main
       with:
-        name: Love Testsuite
+        name: Love Testsuite MacOS
+        title: macos-test-report
         path: testing/sample.md
   windows:
     runs-on: windows-latest
@@ -24,7 +25,8 @@ jobs:
     - name: Love Test Report
       uses: ellraiser/love-test-report@main
       with:
-        name: Love Testsuite
+        name: Love Testsuite Windows
+        title: windows-test-report
         path: testing/sample.md
   linux-os:
     runs-on: ubuntu-20.04
@@ -36,5 +38,6 @@ jobs:
     - name: Love Test Report
       uses: ellraiser/love-test-report@main
       with:
-        name: Love Testsuite
+        name: Love Testsuite Linux
+        title: linux-test-report
         path: testing/sample.md

@@ -3,6 +3,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs')
 const name = core.getInput('name', { required: true });
+const title = core.getInput('title', { required: true });
 const path = core.getInput('path', { required: true });
 const token = core.getInput('token', { required: true });
 const octokit = github.getOctokit(token);
@@ -50,7 +51,7 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
   // add repo check
   var createCheck = octokit.rest.checks.create(Object.assign({ 
     head_sha: process.env.GITHUB_SHA, 
-    name: 'Test Results', 
+    name: title, 
     status: 'completed', 
     conclusion: conclusion,
     output: {
