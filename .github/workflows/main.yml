@@ -5,8 +5,12 @@ jobs:
   macOS:
     runs-on: macos-latest
     steps:
+    - name: Get sample file
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: testing/sample.md
     - name: Love Test Report
       uses: ellraiser/love-test-report@main
       with:
         name: Test Output
-        path: test.md
+        path: testing/sample.md
