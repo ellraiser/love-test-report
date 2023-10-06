@@ -5,8 +5,10 @@ jobs:
   macOS:
     runs-on: macos-latest
     steps:
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.8.1
     - name: Love Test Report
-      uses: ellraiser/love-test-report@v0.2
+      uses: ellraiser/love-test-report@v0.3
       with:
         name: Test Output
         path: output/*.xml
