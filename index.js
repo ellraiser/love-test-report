@@ -34,11 +34,11 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
   // get badge status
   var status = failures > 0 ? 'critical' : 'success'
   var badgeinfo = 'tests-' + 
-    String(passed) + '%20passed,' + 
-    String(failures) + '%20failed,' + 
-    String(skipped) + '%20skipped-' + status;
+    String(passed) + ' passed,' + 
+    String(failures) + ' failed,' + 
+    String(skipped) + ' skipped-' + status;
   var msg = failures > 0 ? 'Tests Failed' : 'Tests Passed'
-  var badge = '[' + msg + '](https://img.shields.io/badge/' + badgeinfo + ')'
+  var badge = '![' + msg + '](https://img.shields.io/badge/' + encodeURIComponent(badgeinfo) + ')'
 
   // check test result
   var failed = failures > 0
