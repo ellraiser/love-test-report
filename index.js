@@ -22,27 +22,13 @@ fs.readFile(path, function(err, data) {
   core.info('file data', data)
 })
 
-// 
-
-var createCheck = octokit.rest.checks.create(Object.assign(
-  { head_sha: process.env.GITHUB_SHA, 
-   name, 
-   status: 'in_progress', 
-   output: {
-     title: name,
-     summary: ''
-  } 
-}, github.context.repo));
-core.info('check', createCheck);
-
 // check test result
-const conslusion = 'CONCLUSION';
 const failed = false
-
 const icon = failed ? '❌' : '✅';
-var updateCheck = octokit.rest.checks.update(Object.assign({ 
-  check_run_id: createCheck.data.id, 
-  conclusion, 
+
+var createCheck = octokit.rest.checks.create(Object.assign({ 
+  head_sha: process.env.GITHUB_SHA, 
+  name: 'Test Results', 
   status: 'completed', 
   output: {
     title: `${name} ${icon}`,
