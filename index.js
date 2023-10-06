@@ -9,7 +9,7 @@ const octokit = github.getOctokit(token);
 
 
 // read md file at path
-const reportdata = 'REPORT_NOT_FOUND'
+var reportdata = 'REPORT_NOT_FOUND'
 core.info('Reading report from: ', path);
 fs.readFile(path, function(err, data) {
   if (err) core.info('Report read error: ', err)
@@ -18,13 +18,13 @@ fs.readFile(path, function(err, data) {
 
 // check test result
 // @TODO pull from md data!
-const failed = false
-const icon = failed ? '❌' : '✅';
-const conclusion = failed ? 'failure' : 'success'
-const passed = 1
-const failures = 1
-const skipped = 1
-const time = 1
+var failed = false
+var icon = failed ? '❌' : '✅';
+var conclusion = failed ? 'failure' : 'success'
+var passed = 1
+var failures = 1
+var skipped = 1
+var time = 1
 
 // add repo check
 var createCheck = octokit.rest.checks.create(Object.assign({ 
