@@ -36,7 +36,7 @@ var createCheck = octokit.rest.checks.create(Object.assign({
   } 
 }, github.context.repo));
 
-core.setOutput('conclusion', conslusion);
+core.setOutput('conclusion', 'it did stuff?');
 core.setOutput('passed', 1);
 core.setOutput('failed', 1);
 core.setOutput('skipped', 1);
