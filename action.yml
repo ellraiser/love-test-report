@@ -4,7 +4,10 @@ description: |
 author: ellraiser <ell@tngineers.com>
 inputs:
   name:
-    description: Name for the report run
+    description: Name for the report 
+    required: true
+  title:
+    description: Title to show in the jobs summary
     required: true
   path:
     description: |
