@@ -1,10 +1,14 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
+const fs = require('fs')
 
 const name = core.getInput('name');
 const path = core.getInput('path');
 const token = core.getInput('token');
 const octokit = github.getOctokit(token);
+
+core.info('token', token)
+core.info('octokit', octokit);
 
 // this.
 
@@ -13,9 +17,14 @@ const octokit = github.getOctokit(token);
 // core.warning(
 
 // read md file at path here
+core.info('path', path);
+fs.readFile(path, function(err, data) {
+  core.info('file data', data)
+})
+
 // 
 
-var createCheck = yield octokit.rest.checks.create(Object.assign(
+var createCheck = octokit.rest.checks.create(Object.assign(
   { head_sha: process.env.GITHUB_SHA, 
    name, 
    status: 'in_progress', 
@@ -30,13 +39,13 @@ core.info('check', createCheck);
 const conslusion = 'CONCLUSION';
 
 const icon = isFailed ? '❌' : '✅';
-var updateCheck = yield octokit.rest.checks.update(Object.assign({ 
+var updateCheck = octokit.rest.checks.update(Object.assign({ 
   check_run_id: createCheck.data.id, 
   conclusion, 
   status: 'completed', 
   output: {
     title: `${name} ${icon}`,
-    'SUMMARY MD DATA'
+    summary: 'SUMMARY MD DATA'
   } 
 }, github.context.repo));
 
