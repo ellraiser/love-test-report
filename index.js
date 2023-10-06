@@ -4,7 +4,7 @@ const github = require('@actions/github');
 const fs = require('fs')
 const name = '${{ inputs.name }}';
 const path = '${{ inputs.path }}';
-const token = '${{ inputs.token }}';
+const token = core.getInput('token');
 const octokit = github.getOctokit(token);
 
 
