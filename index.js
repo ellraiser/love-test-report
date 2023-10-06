@@ -30,6 +30,7 @@ var createCheck = octokit.rest.checks.create(Object.assign({
   head_sha: process.env.GITHUB_SHA, 
   name: 'Test Results', 
   status: 'completed', 
+  conclusion: 'it did stuff!',
   output: {
     title: `${name} ${icon}`,
     summary: 'SUMMARY MD DATA'
