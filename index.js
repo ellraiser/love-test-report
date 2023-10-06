@@ -37,8 +37,9 @@ core.info('check', createCheck);
 
 // check test result
 const conslusion = 'CONCLUSION';
+const failed = false
 
-const icon = isFailed ? '❌' : '✅';
+const icon = failed ? '❌' : '✅';
 var updateCheck = octokit.rest.checks.update(Object.assign({ 
   check_run_id: createCheck.data.id, 
   conclusion, 
