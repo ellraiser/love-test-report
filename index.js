@@ -13,6 +13,7 @@ var reportdata = 'REPORT_NOT_FOUND'
 core.info('Reading report from: ' + path);
 fs.readFile(path, function(err, data) {
   if (err) core.info('Report read error: ' + err)
+  core.info(data)
   reportdata = data
 })
 
