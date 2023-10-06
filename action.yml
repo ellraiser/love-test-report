@@ -1,4 +1,4 @@
-name: Test Reporter
+name: Love Test Reporter
 description: |
   basic github action to dump report output for love-test
 author: ellraiser <ell@tngineers.com>
