@@ -1,0 +1,12 @@
+name: continuous-integration
+on: [push, pull_request]
+
+jobs:
+  macOS:
+    runs-on: macos-latest
+    steps:
+    - name: Love Test Report
+      uses: ellraiser/love.test-report@v0.1
+      with:
+        name: Test Output
+        path: output/*.xml
