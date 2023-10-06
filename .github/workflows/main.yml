@@ -9,4 +9,4 @@ jobs:
       uses: ellraiser/love-test-report@main
       with:
         name: Test Output
-        path: test.md
+        path: ./test.md

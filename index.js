@@ -2,9 +2,9 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs')
-const name = '${{ inputs.name }}';
-const path = '${{ inputs.path }}';
-const token = core.getInput('token');
+const name = core.getInput('name', { required: true });
+const path = core.getInput('path', { required: true });
+const token = core.getInput('token', { required: true });
 const octokit = github.getOctokit(token);
 
 
