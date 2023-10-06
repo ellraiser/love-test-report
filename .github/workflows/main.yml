@@ -6,7 +6,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Love Test Report
-      uses: ellraiser/love-test-report@v0.1
+      uses: ellraiser/love-test-report@latest
       with:
         name: Test Output
         path: output/*.xml
