@@ -1,0 +1,36 @@
+name: Test Reporter
+description: |
+  basic github action to dump report output for love-test
+author: ellraiser <ell@tngineers.com>
+inputs:
+  name:
+    description: Name for the report run
+    required: true
+  path:
+    description: |
+      Path to the love-test exported md file
+    required: true
+  token:
+    description: GitHub Access Token
+    required: false
+    default: ${{ github.token }}
+outputs:
+  conclusion:
+    description: |
+      Final conclusion of the created check run:
+        - 'success' if no failed tests was found
+        - 'failure' if any failed test was found
+  passed:
+    description: Count of passed tests
+  failed:
+    description: Count of failed tests
+  skipped:
+    description: Count of skipped tests
+  time:
+    description: Test execution time [ms]
+runs:
+  using: 'node16'
+  main: 'index.js'
+branding:
+  color: blue
+  icon: file-text
