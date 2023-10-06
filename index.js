@@ -1,44 +1,46 @@
+// get reqs + action input
 const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs')
-
 const name = core.getInput('name');
 const path = core.getInput('path');
 const token = core.getInput('token');
 const octokit = github.getOctokit(token);
 
-core.info('token', token)
-core.info('octokit', octokit);
 
-// this.
-
-// core.info(`Using test report parser '${this.reporter}'`);
-
-// core.warning(
-
-// read md file at path here
-core.info('path', path);
+// read md file at path
+const reportdata = 'REPORT_NOT_FOUND'
+core.info('Reading report from: ', path);
 fs.readFile(path, function(err, data) {
-  core.info('file data', data)
+  if (err) core.info('Report read error: ', err)
+  reportdata = data
 })
 
 // check test result
+// @TODO pull from md data!
 const failed = false
 const icon = failed ? '❌' : '✅';
+const conclusion = failed ? 'failure' : 'success'
+const passed = 1
+const failures = 1
+const skipped = 1
+const time = 1
 
+// add repo check
 var createCheck = octokit.rest.checks.create(Object.assign({ 
   head_sha: process.env.GITHUB_SHA, 
   name: 'Test Results', 
   status: 'completed', 
-  conclusion: 'success', // or failure
+  conclusion: conclusion,
   output: {
     title: `${name} ${icon}`,
-    summary: 'SUMMARY MD DATA'
+    summary: reportdata
   } 
 }, github.context.repo));
 
-core.setOutput('conclusion', 'it did stuff?');
-core.setOutput('passed', 1);
-core.setOutput('failed', 1);
-core.setOutput('skipped', 1);
-core.setOutput('time', 1);
+// return results incase needed
+core.setOutput('conclusion', conclusion);
+core.setOutput('passed', passed);
+core.setOutput('failed', failures);
+core.setOutput('skipped', skipped);
+core.setOutput('time', time);
