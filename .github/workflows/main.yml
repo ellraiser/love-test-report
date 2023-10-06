@@ -1,4 +1,4 @@
-name: continuous-integration
+name: internal-test
 on: [push, pull_request]
 
 jobs:
@@ -6,7 +6,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Love Test Report
-      uses: ellraiser/love-test-report@v0.4
+      uses: ellraiser/love-test-report@v05
       with:
         name: Test Output
         path: output/*.xml
