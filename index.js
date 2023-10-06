@@ -31,14 +31,17 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
     })
   }
 
+  // get badge status
   var status = failures > 0 ? 'critical' : 'success'
-  var badgeinfo = 'tests-' + String(passed) + ' passed,' + String(failures) + ' failed,' + String(skipped) + ' skipped-' + status;
+  var badgeinfo = 'tests-' + 
+    String(passed) + '%20passed,' + 
+    String(failures) + '%20failed,' + 
+    String(skipped) + '%20skipped-' + status;
   var msg = failures > 0 ? 'Tests Failed' : 'Tests Passed'
-  var badge = '[' + msg + '](https://img.shields.io/badge/tests' + badgeinfo + ')'
+  var badge = '[' + msg + '](https://img.shields.io/badge/' + badgeinfo + ')'
 
   // check test result
-  // @TODO pull from md data!
-  var failed = false
+  var failed = failures > 0
   var icon = failed ? '❌' : '✅';
   var conclusion = failed ? 'failure' : 'success'
   
@@ -49,7 +52,7 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
     status: 'completed', 
     conclusion: conclusion,
     output: {
-      title: `${name} ${icon}`,
+      title: `${icon} ${name} `,
       summary: badge + '\n\n' + reportdata
     } 
   }, github.context.repo));

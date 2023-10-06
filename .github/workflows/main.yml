@@ -12,5 +12,5 @@ jobs:
     - name: Love Test Report
       uses: ellraiser/love-test-report@main
       with:
-        name: Test Output
+        name: Love Testsuite
         path: testing/sample.md
