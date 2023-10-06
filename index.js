@@ -39,11 +39,13 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
     String(skipped) + ' skipped-' + status;
   var msg = failures > 0 ? 'Tests Failed' : 'Tests Passed'
   var badge = '![' + msg + '](https://img.shields.io/badge/' + encodeURIComponent(badgeinfo) + ')'
+  core.info(badge)
 
   // check test result
   var failed = failures > 0
   var icon = failed ? '❌' : '✅';
   var conclusion = failed ? 'failure' : 'success'
+  core.info(icon + ' ' + name)
   
   // add repo check
   var createCheck = octokit.rest.checks.create(Object.assign({ 
@@ -56,6 +58,7 @@ fs.readFile('testing/sample.md', 'utf8', function(err, data) {
       summary: badge + '\n\n' + reportdata
     } 
   }, github.context.repo));
+  core.info(createCheck)
   
   // return results incase needed
   core.setOutput('conclusion', conclusion);
