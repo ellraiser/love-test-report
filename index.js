@@ -16,7 +16,7 @@ var skipped = 0
 var time = 0
 
 core.info('Reading report from: ' + path);
-fs.readFile('testing/sample.md', 'utf8', function(err, data) {
+fs.readFile(path, 'utf8', function(err, data) {
   if (err) core.info('Report read error: ' + err)
 
   core.info(data)
