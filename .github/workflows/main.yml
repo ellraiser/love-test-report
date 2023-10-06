@@ -14,3 +14,27 @@ jobs:
       with:
         name: Love Testsuite
         path: testing/sample.md
+  windows:
+    runs-on: windows-latest
+    steps:
+    - name: Get sample file
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: testing/sample.md
+    - name: Love Test Report
+      uses: ellraiser/love-test-report@main
+      with:
+        name: Love Testsuite
+        path: testing/sample.md
+  linux-os:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Get sample file
+      uses: actions/checkout@v4
+      with:
+        sparse-checkout: testing/sample.md
+    - name: Love Test Report
+      uses: ellraiser/love-test-report@main
+      with:
+        name: Love Testsuite
+        path: testing/sample.md

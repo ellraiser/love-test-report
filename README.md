@@ -1,6 +1,6 @@
 # love-test-report
-basic github action to dump report output for love-test
-just dumps the given path md file into a github repo check
+Basic github action to dump report output for love-test into a github action
 
-will look for speciic header comment in the markdown to set the output results:
+The action will look for speciic header comment in the markdown in the format of:
 `<!-- PASSED 32 || FAILED 1 || SKIPPED 0 || TIME 0.004 -->`
+This is then used to set the totals for the overview + badge
