@@ -10,9 +10,9 @@ const octokit = github.getOctokit(token);
 
 // read md file at path
 var reportdata = 'REPORT_NOT_FOUND'
-core.info('Reading report from: ', path);
+core.info('Reading report from: ' + path);
 fs.readFile(path, function(err, data) {
-  if (err) core.info('Report read error: ', err)
+  if (err) core.info('Report read error: ' + err)
   reportdata = data
 })
 
