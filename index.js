@@ -45,7 +45,7 @@ fs.readFile(path, 'utf8', function(err, data) {
   // check test result
   var failed = failures > 0
   var icon = failed ? '❌' : '✅';
-  var conclusion = failed ? 'failure' : 'success'
+  var conclusion = failed ? 'neutral' : 'success'
   core.info(icon + ' ' + name)
   
   // add repo check
