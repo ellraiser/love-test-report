@@ -6,6 +6,7 @@ const name = core.getInput('name', { required: true });
 const title = core.getInput('title', { required: true });
 const path = core.getInput('path', { required: true });
 const token = core.getInput('token', { required: true });
+const ev_type = core.getInput('event_name', { required: true });
 const octokit = github.getOctokit(token);
 
 // read md file at path
@@ -14,6 +15,8 @@ var passed = 0
 var failures = 0
 var skipped = 0
 var time = 0
+
+core.info('love-test-report => ' + ev_type)
 
 core.info('Reading report from: ' + path);
 fs.readFile(path, 'utf8', function(err, data) {
@@ -48,7 +51,7 @@ fs.readFile(path, 'utf8', function(err, data) {
   var conclusion = failed ? 'failure' : 'success';
   
   // add repo check
-  try {
+  if (ev_type != "pull_request") {
     var createCheck = octokit.rest.checks.create(Object.assign({ 
       head_sha: process.env.GITHUB_SHA, 
       name: title, 
@@ -60,8 +63,8 @@ fs.readFile(path, 'utf8', function(err, data) {
       } 
     }, github.context.repo));
     core.info(createCheck)
-  } catch(ex) {
-    core.info('Failed to create check', ex);
+  } else {
+    core.info('Cannot create check in PR');
   }
   
   // return results incase needed
