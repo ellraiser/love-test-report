@@ -17,6 +17,10 @@ inputs:
     description: GitHub Access Token
     required: false
     default: ${{ github.token }}
+  event_name:
+    description: Event Type
+    required: false
+    default: ${{ github.event_name }}
 outputs:
   conclusion:
     description: |
