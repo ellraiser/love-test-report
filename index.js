@@ -19,6 +19,7 @@ core.info('Reading report from: ' + path);
 fs.readFile(path, 'utf8', function(err, data) {
   if (err) core.info('Report read error: ' + err)
 
+  // log report to output
   core.info(data)
   reportdata = data
 
@@ -38,28 +39,30 @@ fs.readFile(path, 'utf8', function(err, data) {
     String(passed) + ' passed,' + 
     String(failures) + ' failed,' + 
     String(skipped) + ' skipped-' + status;
-  var msg = failures > 0 ? 'Tests Failed' : 'Tests Passed'
-  var badge = '![' + msg + '](https://img.shields.io/badge/' + encodeURIComponent(badgeinfo) + ')'
-  core.info(badge)
+  var msg = failures > 0 ? 'Tests Failed' : 'Tests Passed';
+  var badge = '![' + msg + '](https://img.shields.io/badge/' + encodeURIComponent(badgeinfo) + ')';
 
   // check test result
   var failed = failures > 0
   var icon = failed ? '❌' : '✅';
-  var conclusion = failed ? 'failure' : 'success'
-  core.info(icon + ' ' + name)
+  var conclusion = failed ? 'failure' : 'success';
   
   // add repo check
-  var createCheck = octokit.rest.checks.create(Object.assign({ 
-    head_sha: process.env.GITHUB_SHA, 
-    name: title, 
-    status: 'completed', 
-    conclusion: conclusion,
-    output: {
-      title: `${icon} ${name} `,
-      summary: badge + '\n\n' + reportdata
-    } 
-  }, github.context.repo));
-  core.info(createCheck)
+  try {
+    var createCheck = octokit.rest.checks.create(Object.assign({ 
+      head_sha: process.env.GITHUB_SHA, 
+      name: title, 
+      status: 'completed', 
+      conclusion: conclusion,
+      output: {
+        title: `${icon} ${name} `,
+        summary: badge + '\n\n' + reportdata
+      } 
+    }, github.context.repo));
+    core.info(createCheck)
+  } catch(ex) {
+    core.info('Failed to create check', ex);
+  }
   
   // return results incase needed
   core.setOutput('conclusion', conclusion);
