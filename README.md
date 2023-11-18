@@ -19,3 +19,5 @@ The 3 action parameters are:
 The action will look for specific header comment in the markdown in the format of:  
 `<!-- PASSED 32 || FAILED 1 || SKIPPED 0 || TIME 0.004 -->`  
 This is then used to set the totals for the overview + badge
+
+This action won't generate checks on public PRs due to Github Action restrictions on write access in actions.
